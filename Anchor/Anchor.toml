@@ -12,8 +12,9 @@ roll_and_earn = "GZFENGPA9g1rcvUHUTBY5HoEgmFjJyJoBhLHT9A2wQ8T"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Devnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
-test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+test = "npx ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+deploy-devnet = "anchor deploy --provider.cluster devnet"

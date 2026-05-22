@@ -695,8 +695,9 @@ pub struct InitTreasury<'info> {
     pub game_state: Box<Account<'info, GameState>>,
     #[account(init, payer = authority, space = Treasury::LEN, seeds = [TREASURY_SEED], bump)]
     pub treasury: Box<Account<'info, Treasury>>,
-    #[account(init, payer = authority, associated_token::mint = reward_mint, associated_token::authority = treasury)]
-    pub treasury_token_account: Box<Account<'info, TokenAccount>>,
+    /// CHECK: Treasury ATA created manually via CPI
+    #[account(mut)]
+    pub treasury_token_account: UncheckedAccount<'info>,
     pub reward_mint: Account<'info, Mint>,
     pub token_program: Program<'info, Token>,
     pub associated_token_program: Program<'info, AssociatedToken>,
