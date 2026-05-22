@@ -1,0 +1,17 @@
+{
+  "name": "Roll&Earn Weapon",
+  "symbol": "RAE_ITEM",
+  "description": "A weapon found during an adventure in the Roll&Earn realm.",
+  "image": "ipfs://ITEM_CID",
+  "attributes": [
+    { "trait_type": "Type", "value": "Weapon" },
+    { "trait_type": "Rarity", "value": "Common" },
+    { "trait_type": "Stat Bonus", "value": "+1 to rolls" },
+    { "trait_type": "Roll Bonus", "value": "1" }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [{ "uri": "ItemPlaceholder.png", "type": "image/png" }],
+    "creators": []
+  }
+}

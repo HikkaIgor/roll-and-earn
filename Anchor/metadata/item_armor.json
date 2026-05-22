@@ -1,0 +1,17 @@
+{
+  "name": "Roll&Earn Armor",
+  "symbol": "RAE_ITEM",
+  "description": "A piece of armor found during an adventure in the Roll&Earn realm.",
+  "image": "ipfs://ITEM_CID",
+  "attributes": [
+    { "trait_type": "Type", "value": "Armor" },
+    { "trait_type": "Rarity", "value": "Common" },
+    { "trait_type": "Stat Bonus", "value": "+1 to rolls" },
+    { "trait_type": "Roll Bonus", "value": "1" }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [{ "uri": "ItemPlaceholder.png", "type": "image/png" }],
+    "creators": []
+  }
+}

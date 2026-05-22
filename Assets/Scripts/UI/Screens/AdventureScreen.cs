@@ -332,7 +332,12 @@ namespace RollAndEarn
 
                 string itemName = $"RAE Item #{itemsMinted}";
                 string symbol = "RAE_ITEM";
-                string uri = "";
+                var cfg = GameConfigProvider.Instance?.Config;
+                var itemMintPda = _anchorClient.DeriveItemMintPda(player, itemsMinted);
+                var itemData = ItemData.FromMintAddress(itemMintPda.ToString());
+                string uri = itemData.type == ItemData.ItemType.Armor
+                    ? (cfg?.armorMetadataUri ?? "")
+                    : (cfg?.weaponMetadataUri ?? "");
 
                 var ix = _anchorClient.BuildClaimItemInstruction(player, itemName, symbol, uri, itemsMinted);
                 await _anchorClient.SendTransactionAsync(new[] { ix });

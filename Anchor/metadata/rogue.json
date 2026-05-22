@@ -1,0 +1,20 @@
+{
+  "name": "Roll&Earn Rogue",
+  "symbol": "RAE_HERO",
+  "description": "A swift Rogue from the Roll&Earn realm. Masters of agility and stealth.",
+  "image": "ipfs://ROGUE_CID",
+  "attributes": [
+    { "trait_type": "Class", "value": "Rogue" },
+    { "trait_type": "Strength", "value": "5" },
+    { "trait_type": "Agility", "value": "10" },
+    { "trait_type": "Intelligence", "value": "6" },
+    { "trait_type": "Luck", "value": "8" },
+    { "trait_type": "Level", "value": "1" },
+    { "trait_type": "Experience", "value": "0" }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [{ "uri": "RogueCard.png", "type": "image/png" }],
+    "creators": []
+  }
+}

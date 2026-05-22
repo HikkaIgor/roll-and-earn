@@ -1,0 +1,20 @@
+{
+  "name": "Roll&Earn Warrior",
+  "symbol": "RAE_HERO",
+  "description": "A fearless Warrior from the Roll&Earn realm. Masters of strength and melee combat.",
+  "image": "ipfs://WARRIOR_CID",
+  "attributes": [
+    { "trait_type": "Class", "value": "Warrior" },
+    { "trait_type": "Strength", "value": "10" },
+    { "trait_type": "Agility", "value": "6" },
+    { "trait_type": "Intelligence", "value": "4" },
+    { "trait_type": "Luck", "value": "5" },
+    { "trait_type": "Level", "value": "1" },
+    { "trait_type": "Experience", "value": "0" }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [{ "uri": "WarriorCard.png", "type": "image/png" }],
+    "creators": []
+  }
+}

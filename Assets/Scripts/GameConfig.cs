@@ -14,6 +14,13 @@ namespace RollAndEarn
         [Header("IPFS")]
         public string ipfsGateway = "https://ipfs.io/ipfs/";
 
+        [Header("NFT Metadata URIs")]
+        public string warriorMetadataUri;
+        public string rogueMetadataUri;
+        public string mageMetadataUri;
+        public string weaponMetadataUri;
+        public string armorMetadataUri;
+
         [Header("Faucet")]
         public string faucetApiEndpoint;
         public ulong faucetAmount = 100_000_000_000;

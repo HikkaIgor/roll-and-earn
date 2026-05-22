@@ -1,0 +1,20 @@
+{
+  "name": "Roll&Earn Mage",
+  "symbol": "RAE_HERO",
+  "description": "A powerful Mage from the Roll&Earn realm. Masters of intelligence and arcane arts.",
+  "image": "ipfs://MAGE_CID",
+  "attributes": [
+    { "trait_type": "Class", "value": "Mage" },
+    { "trait_type": "Strength", "value": "4" },
+    { "trait_type": "Agility", "value": "5" },
+    { "trait_type": "Intelligence", "value": "10" },
+    { "trait_type": "Luck", "value": "6" },
+    { "trait_type": "Level", "value": "1" },
+    { "trait_type": "Experience", "value": "0" }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [{ "uri": "MageCard.png", "type": "image/png" }],
+    "creators": []
+  }
+}

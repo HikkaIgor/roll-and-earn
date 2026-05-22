@@ -207,7 +207,15 @@ namespace RollAndEarn
                 else
                 {
                     Debug.Log($"[CharCreate] No mint, using create_character: name={name}, class={classType}");
-                    ixs = new[] { _anchorClient.BuildCreateCharacterInstruction(playerPk, name, "RAE_HERO", "", classType) };
+                    var cfg = GameConfigProvider.Instance?.Config;
+                    var uri = classType switch
+                    {
+                        0 => cfg?.warriorMetadataUri ?? "",
+                        1 => cfg?.rogueMetadataUri ?? "",
+                        2 => cfg?.mageMetadataUri ?? "",
+                        _ => ""
+                    };
+                    ixs = new[] { _anchorClient.BuildCreateCharacterInstruction(playerPk, name, "RAE_HERO", uri, classType) };
                 }
 
                 var txSig = await _anchorClient.SendTransactionAsync(ixs);
