@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4024101111cd9344eb5d8af631881964, type: 3}
+  m_Name: EnchantedForest
+  m_EditorClassIdentifier: Assembly-CSharp::RollAndEarn.AdventureConfigSO
+  adventureName: EnchantedForest
+  adventureType: 0
+  cost: 0
+  cooldownSeconds: 300
+  description: A mystical forest path
+  lowReward: 5000000000
+  midReward: 15000000000
+  highReward: 30000000000
+  specialReward: 30000000000
+  lowXp: 5
+  midXp: 15
+  highXp: 25
+  specialXp: 35
+  midStart: 6
+  highStart: 11
+  specialStart: 20
+  artSprite: {fileID: 3244497438689889087, guid: eef8824fc5cceb0488d89524ea45f2f6, type: 3}

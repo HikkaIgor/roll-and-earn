@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4024101111cd9344eb5d8af631881964, type: 3}
+  m_Name: DarkDungeon
+  m_EditorClassIdentifier: Assembly-CSharp::RollAndEarn.AdventureConfigSO
+  adventureName: DarkDungeon
+  adventureType: 1
+  cost: 10000000000
+  cooldownSeconds: 900
+  description: A cursed dungeon
+  lowReward: 5000000000
+  midReward: 25000000000
+  highReward: 60000000000
+  specialReward: 60000000000
+  lowXp: 10
+  midXp: 25
+  highXp: 50
+  specialXp: 75
+  midStart: 5
+  highStart: 9
+  specialStart: 18
+  artSprite: {fileID: 3244497438689889087, guid: eef8824fc5cceb0488d89524ea45f2f6, type: 3}

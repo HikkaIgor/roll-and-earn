@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9839c3ce3b1d1ff47b6a61e12dd96f05, type: 3}
+  m_Name: New Game Config
+  m_EditorClassIdentifier: Assembly-CSharp::RollAndEarn.GameConfig
+  rpcEndpoint: https://api.devnet.solana.com
+  websocketEndpoint: wss://api.devnet.solana.com
+  rolandMintAddress: G47BKqhe57LFL8hSL4MwSJ545d5EL6XFgAy9nkoHNjbB
+  programId: GZFENGPA9g1rcvUHUTBY5HoEgmFjJyJoBhLHT9A2wQ8T
+  ipfsGateway: https://ipfs.io/ipfs/
+  faucetApiEndpoint: 
+  faucetAmount: 100000000000
+  cooldownCheckIntervalSeconds: 10
+  transactionTimeoutSeconds: 30
+  Adventures:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  CharacterClasses:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

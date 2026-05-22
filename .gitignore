@@ -1,0 +1,73 @@
+# Unity
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+.vs/
+.vscode/
+ExportedObj/
+Assets/Plugins/Editor/JetBrains/
+.idea/
+
+# Unity AssetStore
+Assets/AssetStoreTools*
+
+# Unity PlasticSCM
+.plastic/
+
+# Anchor / Solana
+Anchor/target/
+Anchor/test-ledger/
+Anchor/node_modules/
+test-ledger/
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Build outputs
+*.apk
+*.aab
+*.unitypackage
+*.exe
+*.dll
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Secrets - NEVER commit
+*.pem
+*.key
+id.json
+*passphrase*
+*secret*
+*mnemonic*
+
+# opencode
+.opencode/
+
+# Recovery
+Assets/_Recovery/
+
+# Misc
+*.log
+graphify-out/
+address/

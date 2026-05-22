@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c669bf08a843c241a2010a11bbb524c, type: 3}
+  m_Name: Warrior
+  m_EditorClassIdentifier: Assembly-CSharp::RollAndEarn.CharacterClassSO
+  className: Warrior
+  classType: 0
+  baseStrength: 10
+  baseAgility: 6
+  baseIntelligence: 4
+  baseLuck: 5
+  rollBonusDescription: +10 to combat rolls
+  classIcon: {fileID: 0}
+  artSprite: {fileID: -4562980271228933471, guid: 90b8530ce3610ec4880f167bbbc63abb, type: 3}

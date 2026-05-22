@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4024101111cd9344eb5d8af631881964, type: 3}
+  m_Name: DragonsLair
+  m_EditorClassIdentifier: Assembly-CSharp::RollAndEarn.AdventureConfigSO
+  adventureName: DragonsLair
+  adventureType: 2
+  cost: 50000000000
+  cooldownSeconds: 3600
+  description: Face the dragon!
+  lowReward: 10000000000
+  midReward: 50000000000
+  highReward: 150000000000
+  specialReward: 150000000000
+  lowXp: 20
+  midXp: 50
+  highXp: 100
+  specialXp: 150
+  midStart: 4
+  highStart: 8
+  specialStart: 16
+  artSprite: {fileID: 3244497438689889087, guid: eef8824fc5cceb0488d89524ea45f2f6, type: 3}
