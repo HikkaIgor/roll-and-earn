@@ -17,6 +17,11 @@ MonoBehaviour:
   rolandMintAddress: 6uGjyLzTtX6aFMcboD313uT4YKVbCPbLZcvka944VrTB
   programId: GZFENGPA9g1rcvUHUTBY5HoEgmFjJyJoBhLHT9A2wQ8T
   ipfsGateway: https://ipfs.io/ipfs/
+  warriorMetadataUri: ipfs://QmPaMdTd9NZV6JKif3yL5gmuCktMyDEkAFmArXzhBSxerV
+  rogueMetadataUri: ipfs://QmdBwErxt2iF9BvBJTZATmubEWS256MZRJM7rZ4Qu72iRi
+  mageMetadataUri: ipfs://QmNgZK7wajo7EPmhJEiam3hTpGbQwH677FWW293Jnrzwko
+  weaponMetadataUri: ipfs://QmWo35ayPgyJWUAofufpWyCsLthDtZ36YT8vQSPodxUaKS
+  armorMetadataUri: ipfs://QmPSVw4GqLsRwoSXPCJh9Neid2EKr5eNxXBVk7K8U6WqDg
   faucetApiEndpoint: 
   faucetAmount: 100000000000
   cooldownCheckIntervalSeconds: 10
