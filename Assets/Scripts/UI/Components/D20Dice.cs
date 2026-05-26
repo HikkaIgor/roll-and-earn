@@ -84,7 +84,7 @@ namespace RollAndEarn
             textRect.offsetMax = new Vector2(-10, -10);
 
             _diceText = textGo.AddComponent<TextMeshProUGUI>();
-            var font = TMP_Settings.defaultFontAsset;
+            var font = FontProvider.TitleFont ?? TMP_Settings.defaultFontAsset;
             if (font != null) _diceText.font = font;
             _diceText.fontSize = 64;
             _diceText.fontStyle = FontStyles.Bold;
@@ -156,6 +156,8 @@ namespace RollAndEarn
             _isRolling = true;
             _idleTime = 0f;
 
+            SoundManager.Instance.PlayDiceRoll();
+
             _bgImage.color = BgBase;
             _diceText.color = ThemeColors.Primary;
             if (_subLabel != null) _subLabel.text = "D20";
@@ -179,6 +181,7 @@ namespace RollAndEarn
                     _diceText.text = randomFace.ToString();
                     float angle = Random.Range(-20f, 20f);
                     _rectTransform.localEulerAngles = new Vector3(0, 0, angle);
+                    SoundManager.Instance.PlayDiceTick();
                 }
 
                 float scale = 1f + Mathf.Sin(elapsed * 12f) * 0.08f * (1f - t);
@@ -206,6 +209,7 @@ namespace RollAndEarn
 
             _diceText.text = result.ToString();
             Color targetColor = GetResultColor(result);
+            SoundManager.Instance.PlayDiceResult(result);
             _bgImage.color = BgBase;
             if (_subLabel != null)
             {

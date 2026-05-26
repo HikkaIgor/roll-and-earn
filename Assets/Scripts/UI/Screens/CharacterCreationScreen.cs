@@ -62,6 +62,9 @@ namespace RollAndEarn
 
             if (errorText != null) errorText.text = string.Empty;
             _selectedClassIndex = -1;
+
+            foreach (var st in classStatTexts) FontProvider.ApplyToText(st, false);
+            FontProvider.ApplyToText(errorText, false);
         }
 
         private CharacterClassSO[] CreateDefaultClasses()

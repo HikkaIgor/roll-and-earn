@@ -67,6 +67,7 @@ namespace RollAndEarn
             nameText.color = ThemeColors.TextPrimary;
             nameText.textWrappingMode = TextWrappingModes.NoWrap;
             nameText.overflowMode = TextOverflowModes.Ellipsis;
+            FontProvider.ApplyToText(nameText, true);
 
             var statsRect = UIHelper.CreateAnchored("Stats", innerRect,
                 new Vector2(0.05f, 0.03f), new Vector2(0.95f, 0.17f));
@@ -76,6 +77,7 @@ namespace RollAndEarn
             statsText.color = ThemeColors.TextSecondary;
             statsText.textWrappingMode = TextWrappingModes.NoWrap;
             statsText.overflowMode = TextOverflowModes.Ellipsis;
+            FontProvider.ApplyToText(statsText, false);
         }
 
         public void DisplayCharacter(CharacterData data)

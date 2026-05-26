@@ -44,6 +44,18 @@ namespace RollAndEarn
             if (xpBar != null) xpBar.interactable = false;
             var cfg = GameConfigProvider.Instance != null ? GameConfigProvider.Instance.Config : null;
             if (cfg != null) _classes = cfg.CharacterClasses;
+            ApplyFonts();
+        }
+
+        private void ApplyFonts()
+        {
+            FontProvider.ApplyToText(balanceText, true);
+            FontProvider.ApplyToText(solBalanceText, true);
+            FontProvider.ApplyToText(levelText, true);
+            FontProvider.ApplyToText(xpText, false);
+            FontProvider.ApplyToText(dailyRewardText, false);
+            FontProvider.ApplyToText(levelUpCostText, false);
+            FontProvider.ApplyToText(equipmentBonusText, false);
         }
 
         private void OnEnable()
@@ -212,6 +224,7 @@ namespace RollAndEarn
                 var createAta = AnchorClient.CreateAssociatedTokenAccountIdempotent(player, player, rewardMint);
                 var ix = _anchorClient.BuildClaimDailyRewardInstruction(player, rewardMint);
                 await _anchorClient.SendTransactionAsync(new[] { createAta, ix });
+                SoundManager.Instance.PlayDailyReward();
                 Debug.Log("[MainHub] Daily reward tx sent, waiting...");
                 await UniTask.Delay(2000);
                 await RefreshAsync();
@@ -235,6 +248,7 @@ namespace RollAndEarn
                 var createAta = AnchorClient.CreateAssociatedTokenAccountIdempotent(player, player, rewardMint);
                 var ix = _anchorClient.BuildLevelUpInstruction(player, rewardMint);
                 await _anchorClient.SendTransactionAsync(new[] { createAta, ix });
+                SoundManager.Instance.PlayLevelUp();
                 Debug.Log("[MainHub] LevelUp tx sent, waiting...");
                 await UniTask.Delay(2000);
                 await RefreshAsync();

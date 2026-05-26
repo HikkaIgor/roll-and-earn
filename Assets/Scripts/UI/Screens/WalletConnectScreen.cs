@@ -28,6 +28,8 @@ namespace RollAndEarn
                 connectButton.interactable = true;
             }
             if (statusText != null) statusText.text = "Connect your wallet to begin";
+            FontProvider.ApplyToText(titleLabel, true);
+            FontProvider.ApplyToText(statusText, false);
         }
 
         private void OnDisable()
@@ -70,6 +72,8 @@ namespace RollAndEarn
             }
 
             if (statusText != null) statusText.text = $"Connected: {publicKey.Substring(0, 8)}...";
+
+             SoundManager.Instance.PlayLogin();
 
              var anchorClient = FindAnyObjectByType<AnchorClient>();
              var player = new Solana.Unity.Wallet.PublicKey(publicKey);

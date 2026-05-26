@@ -28,17 +28,10 @@ namespace RollAndEarn
             BuildUI();
         }
 
-        private static TMP_FontAsset GetFont()
-        {
-            var font = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
-            if (font != null) return font;
-            if (TMP_Settings.defaultFontAsset != null) return TMP_Settings.defaultFontAsset;
-            return null;
-        }
-
         private void BuildUI()
         {
-            var font = GetFont();
+            var titleFont = FontProvider.TitleFont ?? FontProvider.DefaultFont;
+            var bodyFont = FontProvider.BodyFont ?? FontProvider.DefaultFont;
 
             _overlay = Create("Overlay", transform);
             var overlayImg = _overlay.AddComponent<Image>();
@@ -92,10 +85,10 @@ namespace RollAndEarn
             vlg.childForceExpandWidth = true;
             vlg.childForceExpandHeight = false;
 
-            _titleText = MakeText("Title", content, font, 38, ThemeColors.Primary, TextAlignmentOptions.Center);
+            _titleText = MakeText("Title", content, titleFont, 38, ThemeColors.Primary, TextAlignmentOptions.Center);
             _titleText.fontStyle = FontStyles.Bold;
 
-            _rollText = MakeText("Roll", content, font, 22, ThemeColors.TextPrimary, TextAlignmentOptions.Center);
+            _rollText = MakeText("Roll", content, bodyFont, 22, ThemeColors.TextPrimary, TextAlignmentOptions.Center);
 
             var divider = Create("Divider", content);
             var divImg = divider.AddComponent<Image>();
@@ -105,7 +98,7 @@ namespace RollAndEarn
             var divLayout = divider.AddComponent<LayoutElement>();
             divLayout.preferredHeight = 2;
 
-            _tierText = MakeText("Tier", content, font, 30, ThemeColors.AccentGold, TextAlignmentOptions.Center);
+            _tierText = MakeText("Tier", content, titleFont, 30, ThemeColors.AccentGold, TextAlignmentOptions.Center);
             _tierText.fontStyle = FontStyles.Bold;
 
             _rewardsGroup = new GameObject("RewardsGroup", typeof(VerticalLayoutGroup));
@@ -118,13 +111,13 @@ namespace RollAndEarn
             rwVlg.childForceExpandWidth = true;
             rwVlg.childForceExpandHeight = false;
 
-            _tokenText = MakeText("Token", _rewardsGroup.GetComponent<RectTransform>(), font, 24, ThemeColors.Success, TextAlignmentOptions.Center);
+            _tokenText = MakeText("Token", _rewardsGroup.GetComponent<RectTransform>(), bodyFont, 24, ThemeColors.Success, TextAlignmentOptions.Center);
             _tokenText.fontStyle = FontStyles.Bold;
-            _xpText = MakeText("XP", _rewardsGroup.GetComponent<RectTransform>(), font, 22, ThemeColors.Secondary, TextAlignmentOptions.Center);
-            _specialText = MakeText("Special", _rewardsGroup.GetComponent<RectTransform>(), font, 20, ThemeColors.AccentGold, TextAlignmentOptions.Center);
+            _xpText = MakeText("XP", _rewardsGroup.GetComponent<RectTransform>(), bodyFont, 22, ThemeColors.Secondary, TextAlignmentOptions.Center);
+            _specialText = MakeText("Special", _rewardsGroup.GetComponent<RectTransform>(), titleFont, 20, ThemeColors.AccentGold, TextAlignmentOptions.Center);
             _specialText.fontStyle = FontStyles.Bold;
 
-            _failText = MakeText("Fail", content, font, 20, ThemeColors.Error, TextAlignmentOptions.Center);
+            _failText = MakeText("Fail", content, bodyFont, 20, ThemeColors.Error, TextAlignmentOptions.Center);
 
             var spacer = new GameObject("Spacer", typeof(LayoutElement));
             spacer.GetComponent<RectTransform>().SetParent(content, false);
@@ -158,7 +151,7 @@ namespace RollAndEarn
             var btnBgRectParent = _closeBtn.GetComponent<RectTransform>();
             _closeBtn.targetGraphic = btnBgImg;
 
-            _closeLabel = MakeText("CloseLabel", btnBgRectParent, font, 20, new Color(0.05f, 0.04f, 0.10f), TextAlignmentOptions.Center);
+            _closeLabel = MakeText("CloseLabel", btnBgRectParent, titleFont, 20, new Color(0.05f, 0.04f, 0.10f), TextAlignmentOptions.Center);
             _closeLabel.text = "CONTINUE";
             _closeLabel.fontStyle = FontStyles.Bold;
             _closeBtn.onClick.AddListener(Hide);
@@ -241,6 +234,7 @@ namespace RollAndEarn
             if (_closeLabel != null) _closeLabel.text = "CONTINUE";
             if (_closeBtnGlow != null) _closeBtnGlow.color = new Color(1f, 0.722f, 0f, 0.10f);
 
+            SoundManager.Instance.PlayReward();
             if (_overlay != null) _overlay.SetActive(true);
         }
 
@@ -267,6 +261,7 @@ namespace RollAndEarn
             if (_closeLabel != null) _closeLabel.text = "TRY AGAIN";
             if (_closeBtnGlow != null) _closeBtnGlow.color = new Color(0.937f, 0.267f, 0.267f, 0.10f);
 
+            SoundManager.Instance.PlayFail();
             if (_overlay != null) _overlay.SetActive(true);
         }
 

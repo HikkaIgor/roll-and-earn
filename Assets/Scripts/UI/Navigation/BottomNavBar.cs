@@ -35,6 +35,7 @@ namespace RollAndEarn
                 int idx = i;
                 navButtons[i].onClick.AddListener(() => Navigate(idx));
             }
+            foreach (var label in navLabels) FontProvider.ApplyToText(label, true);
         }
 
         private void Update()
@@ -79,6 +80,7 @@ namespace RollAndEarn
             if (index < 0 || index >= ScreenNames.Length) return;
             if (!IsReady()) return;
 
+            SoundManager.Instance.PlayClick();
             if (_screenManager != null) _screenManager.ShowScreen(ScreenNames[index]);
             SetActive(index);
         }

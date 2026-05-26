@@ -22,6 +22,8 @@ public class SimpleUIBootstrap : MonoBehaviour
         SetupScreens();
         if (connectBtn != null)
             connectBtn.onClick.AddListener(OnConnect);
+        FontProvider.ApplyToText(titleLabel, true);
+        FontProvider.ApplyToText(statusLabel, false);
         ShowWalletConnect();
     }
 

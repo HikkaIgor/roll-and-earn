@@ -26,6 +26,9 @@ namespace RollAndEarn
 
         private void OnEnable()
         {
+            FontProvider.ApplyToText(publicKeyText, false);
+            FontProvider.ApplyToText(balanceText, true);
+            FontProvider.ApplyToText(statusText, false);
             RefreshAsync().Forget();
         }
 
@@ -94,6 +97,7 @@ namespace RollAndEarn
                     txt.text = sig.Substring(0, Math.Min(16, sig.Length)) + "...";
                     txt.fontSize = 14;
                     txt.color = ThemeColors.Secondary;
+                    FontProvider.ApplyToText(txt, false);
                     var le = obj.AddComponent<LayoutElement>();
                     le.preferredHeight = 22;
                 }

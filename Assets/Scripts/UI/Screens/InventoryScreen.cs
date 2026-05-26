@@ -34,6 +34,8 @@ namespace RollAndEarn
             if (_nftManager == null) _nftManager = FindAnyObjectByType<NFTManager>();
             if (_anchorClient == null) _anchorClient = FindAnyObjectByType<AnchorClient>();
             EnsureGridLayout();
+            FontProvider.ApplyToText(statusText, false);
+            FontProvider.ApplyToText(bonusSummaryText, true);
         }
 
         private void EnsureGridLayout()
@@ -215,6 +217,7 @@ namespace RollAndEarn
             nameText.textWrappingMode = TextWrappingModes.NoWrap;
             nameText.overflowMode = TextOverflowModes.Ellipsis;
             nameText.text = itemData.itemName;
+            FontProvider.ApplyToText(nameText, true);
 
             var statsObj = new GameObject("Stats");
             statsObj.transform.SetParent(innerObj, false);
@@ -266,6 +269,7 @@ namespace RollAndEarn
                 var ix = _anchorClient.BuildEquipItemInstruction(player, itemMint, itemTokenAccount, itemType);
                 await _anchorClient.SendTransactionAsync(new[] { ix });
 
+                SoundManager.Instance.PlayEquip();
                 await UniTask.Delay(1000);
 
                 var rpc = SolanaManager.Instance.GetRpcClient();
@@ -350,6 +354,8 @@ namespace RollAndEarn
                 var player = new Solana.Unity.Wallet.PublicKey(SolanaManager.Instance.PublicKey);
                 var ix = _anchorClient.BuildUnequipItemInstruction(player, itemType);
                 await _anchorClient.SendTransactionAsync(new[] { ix });
+
+                SoundManager.Instance.PlayUnequip();
 
                 await UniTask.Delay(1000);
 

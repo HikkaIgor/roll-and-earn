@@ -57,6 +57,16 @@ namespace RollAndEarn
 
             if (d20Dice == null)
                 d20Dice = D20Dice.Create(transform);
+
+            ApplyFonts();
+        }
+
+        private void ApplyFonts()
+        {
+            foreach (var cd in adventureCooldownTexts) FontProvider.ApplyToText(cd, false);
+            FontProvider.ApplyToText(rollStatusText, true);
+            FontProvider.ApplyToText(unclaimedItemsText, false);
+            FontProvider.ApplyToText(equipmentBonusText, false);
         }
 
         private void CreateBalanceDisplay()
@@ -99,8 +109,7 @@ namespace RollAndEarn
             textRect.offsetMax = new Vector2(-10, -4);
 
             _balanceText = textGo.AddComponent<TextMeshProUGUI>();
-            var font = TMP_Settings.defaultFontAsset;
-            if (font != null) _balanceText.font = font;
+            FontProvider.ApplyToText(_balanceText, true);
             _balanceText.fontSize = 18;
             _balanceText.fontStyle = FontStyles.Bold;
             _balanceText.color = ThemeColors.AccentGold;
