@@ -1,179 +1,179 @@
 # Roll&Earn — Solana Play-to-Earn RPG
 
-A fantasy RPG built on Solana with an on-chain smart contract (Anchor/Rust) and a Unity client (C#). Players create characters (Warrior/Rogue/Mage), roll D20 dice on adventures, earn ROLAND tokens and XP, find and equip NFT items, level up, and claim daily rewards.
+Фэнтези-RPG на блокчейне Solana с on-chain смарт-контрактом (Anchor/Rust) и Unity-клиентом (C#). Игроки создают персонажей (Воин/Разбойник/Маг), бросают кубик D20 в приключениях, зарабатывают токены ROLAND и XP, находят и экипируют NFT-предметы, повышают уровень и получают ежедневные награды.
 
-**Deployed on Devnet:** `GZFENGPA9g1rcvUHUTBY5HoEgmFjJyJoBhLHT9A2wQ8T`
+**Развёрнуто на Devnet:** `GZFENGPA9g1rcvUHUTBY5HoEgmFjJyJoBhLHT9A2wQ8T`
 
-## Architecture
+## Архитектура
 
 ```
 RollAndEarn/
-├── Anchor/                          # Solana smart contract
-│   ├── programs/roll_and_earn/      # Rust program (anchor-lang 0.30.1)
-│   ├── tests/roll_and_earn.ts       # 21 tests (Mocha + Anchor)
-│   ├── scripts/                     # Init-game, PDA derivation helpers
-│   ├── metadata/                    # IPFS metadata JSON templates
-│   └── Anchor.toml                  # Program ID, cluster config
+├── Anchor/                          # Смарт-контракт Solana
+│   ├── programs/roll_and_earn/      # Rust-программа (anchor-lang 0.30.1)
+│   ├── tests/roll_and_earn.ts       # 21 тест (Mocha + Anchor)
+│   ├── scripts/                     # Инициализация игры, вывод PDA
+│   ├── metadata/                    # JSON-шаблоны метаданных IPFS
+│   └── Anchor.toml                  # Program ID, конфигурация кластера
 ├── Assets/
-│   ├── Scenes/MainScene.unity       # Main game scene
-│   ├── Scripts/                     # C# game code
+│   ├── Scenes/MainScene.unity       # Основная сцена игры
+│   ├── Scripts/                     # Код на C#
 │   │   ├── Core/                    # SolanaManager, AnchorClient, NFTManager, TokenManager, SoundManager
 │   │   ├── GameLogic/               # AdventureManager, CooldownManager, RewardCalculator
 │   │   ├── Models/                  # PlayerProfile, RollResult, CharacterData, ItemData
-│   │   ├── UI/                      # Screens, Components, Navigation, Theme
+│   │   ├── UI/                      # Экраны, компоненты, навигация, тема
 │   │   └── Utils/                   # IPFSLoader, JsonParser, CoroutineUtils
-│   ├── Editor/RollAndEarnSetup.cs   # Programmatic scene generator
+│   ├── Editor/RollAndEarnSetup.cs   # Программный генератор сцены
 │   ├── Fonts/                       # Cinzel, MedievalSharp (TTF)
-│   └── Resources/RollAndEarn/       # GameConfig, ScriptableObjects, Sprites
+│   └── Resources/RollAndEarn/       # GameConfig, ScriptableObjects, спрайты
 ```
 
-## Prerequisites
+## Требования
 
-### Smart Contract (Anchor)
+### Смарт-контракт (Anchor)
 - **Solana CLI** ≥ 1.17 (`sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"`)
 - **Anchor CLI** ≥ 0.30 (`cargo install --git https://github.com/coral-xyz/anchor anchor-cli --tag v0.30.1`)
 - **Node.js** ≥ 18
 - **Rust** ≥ 1.75 (`rustup default stable`)
 
-### Unity Client
-- **Unity** ≥ 2022.3 (URP template)
-- **TextMeshPro** (via Package Manager)
-- **UniTask** (via Package Manager — `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask`)
+### Unity-клиент
+- **Unity** ≥ 2022.3 (шаблон URP)
+- **TextMeshPro** (через Package Manager)
+- **UniTask** (через Package Manager — `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask`)
 - **Solana Unity SDK** (`https://github.com/garbles-labs/Solana.Unity-SDK.git`)
 
-## Smart Contract Setup
+## Настройка смарт-контракта
 
-### 1. Install Dependencies
+### 1. Установка зависимостей
 
 ```bash
 cd Anchor
 npm install
 ```
 
-### 2. Build
+### 2. Сборка
 
 ```bash
 anchor build
 ```
 
-The compiled `.so` binary is at `target/deploy/roll_and_earn.so`.
+Скомпилированный бинарник `.so` находится в `target/deploy/roll_and_earn.so`.
 
-### 3. Run Tests (Local Validator)
+### 3. Запуск тестов (локальный валидатор)
 
 ```bash
 anchor test
 ```
 
-This starts a local `solana-test-validator`, deploys the program, and runs 21 tests covering all instructions.
+Запускает локальный `solana-test-validator`, деплоит программу и выполняет 21 тест, покрывающий все инструкции.
 
-### 4. Deploy to Devnet
+### 4. Деплой на Devnet
 
 ```bash
-# Configure Solana CLI for Devnet
+# Настройка Solana CLI на Devnet
 solana config set --url devnet
 
-# Fund your wallet (airdrop SOL for deployment fees)
+# Пополнить кошелёк (airdrop SOL для оплаты деплоя)
 solana airdrop 2
 
-# Deploy
+# Деплой
 anchor deploy --provider.cluster devnet
 ```
 
-### 5. Initialize the Game
+### 5. Инициализация игры
 
-After deployment, run the init script to set up on-chain state:
+После деплоя запустите скрипт инициализации on-chain состояния:
 
 ```bash
-# Update the program ID in scripts if needed
+# При необходимости обновите Program ID в скриптах
 npx ts-node scripts/init-game.ts
 ```
 
-This creates:
-- **GameState** PDA — global game state with reward mint and treasury references
-- **Treasury** PDA — holds ROLAND tokens for rewards
-- **MintAuthority** PDA — authority for minting NFTs (character + items)
+Скрипт создаёт:
+- **GameState** PDA — глобальное состояние игры (reward mint, treasury)
+- **Treasury** PDA — хранит токены ROLAND для наград
+- **MintAuthority** PDA — авторитет для минтинга NFT (персонажи + предметы)
 
-## Unity Setup
+## Настройка Unity
 
-### 1. Open Project
+### 1. Открыть проект
 
-Open the `RollAndEarn` folder in Unity Hub (Unity 2022.3+ with URP).
+Откройте папку `RollAndEarn` в Unity Hub (Unity 2022.3+ с URP).
 
-### 2. Install Dependencies
+### 2. Установить зависимости
 
-Via **Window > Package Manager > Add package from git URL**:
+Через **Window > Package Manager > Add package from git URL**:
 - `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask`
 - `https://github.com/garbles-labs/Solana.Unity-SDK.git`
 
-Ensure **TextMeshPro** is installed via Package Manager.
+Убедитесь, что **TextMeshPro** установлен через Package Manager.
 
-### 3. Generate Font Assets
+### 3. Генерация шрифтов
 
-Menu: **RollAndEarn > Generate Font Assets**
+Меню: **RollAndEarn > Generate Font Assets**
 
-This creates TMP SDF font assets from the TTF files in `Assets/Fonts/`.
+Создаёт TMP SDF-ассеты шрифтов из TTF-файлов в `Assets/Fonts/`.
 
-### 4. Configure GameConfig
+### 4. Настройка GameConfig
 
-Open `Assets/Resources/RollAndEarn/GameConfig.asset` in the Inspector:
+Откройте `Assets/Resources/RollAndEarn/GameConfig.asset` в Inspector:
 
-| Field | Value |
-|-------|-------|
+| Поле | Значение |
+|------|----------|
 | RPC Endpoint | `https://api.devnet.solana.com` |
-| Roland Mint Address | Your deployed ROLAND token mint |
+| Roland Mint Address | Адрес минта ROLAND |
 | Program ID | `GZFENGPA9g1rcvUHUTBY5HoEgmFjJyJoBhLHT9A2wQ8T` |
 | IPFS Gateway | `https://ipfs.io/ipfs/` |
-| NFT Metadata URIs | IPFS URIs (pre-filled) |
+| NFT Metadata URIs | IPFS URI (предзаполнены) |
 
-### 5. Setup Scene
+### 5. Настройка сцены
 
-Menu: **RollAndEarn > Setup Everything**
+Меню: **RollAndEarn > Setup Everything**
 
-This programmatically generates the entire UI (6 screens, bottom nav, all components) in the active scene. No manual prefab setup needed.
+Программно генерирует весь UI (6 экранов, нижняя навигация, все компоненты) в активной сцене. Ручная настройка префабов не требуется.
 
-### 6. Run
+### 6. Запуск
 
-Press **Play** in the Unity Editor. The game starts at the Wallet Connect screen.
+Нажмите **Play** в Unity Editor. Игра откроется на экране подключения кошелька.
 
-## Game Flow
+## Игровой процесс
 
-1. **Connect Wallet** — In-editor wallet or WebGL Phantom/Solflare
-2. **Create Character** — Choose Warrior, Rogue, or Mage; enter a name
-3. **Claim Airdrop** — One-time 200 ROLAND faucet
-4. **Go on Adventures**:
-   - Enchanted Forest (free, 5 min cooldown)
-   - Dark Dungeon (10 ROLAND, 15 min cooldown)
-   - Dragon's Lair (50 ROLAND, 60 min cooldown)
-5. **Roll D20** — Animated dice, tier-based rewards (tokens + XP + special items)
-6. **Equip Items** — Weapons and armor grant bonus to D20 rolls
-7. **Level Up** — Burn tokens + XP to increase stats
-8. **Daily Rewards** — 50-120 ROLAND with streak bonuses
+1. **Подключить кошелёк** — Встроенный кошелёк (editor) или WebGL Phantom/Solflare
+2. **Создать персонажа** — Выбрать Воина, Разбойника или Мага; ввести имя
+3. **Получить аирдроп** — Разовый кран на 200 ROLAND
+4. **Отправиться в приключение**:
+   - Заколдованный Лес (бесплатно, кд 5 мин)
+   - Тёмное Подземелье (10 ROLAND, кд 15 мин)
+   - Логово Дракона (50 ROLAND, кд 60 мин)
+5. **Бросить D20** — Анимированный кубик, награды по тиру (токены + XP + спецпредметы)
+6. **Экипировать предметы** — Оружие и броня дают бонус к броскам D20
+7. **Повысить уровень** — Сжечь токены + XP для повышения статов
+8. **Ежедневные награды** — 50-120 ROLAND с бонусами за серию
 
-## Smart Contract Instructions (12)
+## Инструкции смарт-контракта (12)
 
-| Instruction | Description |
-|-------------|-------------|
-| `init_game` | Initialize GameState + MintAuthority PDAs |
-| `init_treasury` | Initialize Treasury PDA + ATA |
-| `create_character` | Create profile, mint character NFT, set class stats |
-| `roll_action` | D20 roll, rewards, cooldown, XP |
-| `claim_item` | Mint item NFT from unclaimed specials |
-| `equip_item` | Equip weapon/armor, compute bonus |
-| `unequip_item` | Unequip weapon/armor |
-| `level_up` | Burn tokens + XP to level up |
-| `request_airdrop` | One-time 200 ROLAND faucet |
-| `claim_daily_reward` | Daily 50-120 ROLAND with streak |
-| `init_profile` | Create empty profile PDA via CPI |
-| `recreate_profile` | Overwrite profile for existing mint |
+| Инструкция | Описание |
+|------------|----------|
+| `init_game` | Инициализация GameState + MintAuthority PDA |
+| `init_treasury` | Инициализация Treasury PDA + ATA |
+| `create_character` | Создать профиль, минтить NFT персонажа, установить статы класса |
+| `roll_action` | Бросок D20, награды, кулдаун, XP |
+| `claim_item` | Минтить NFT предмета из неполученных спецпредметов |
+| `equip_item` | Экипировать оружие/броню, вычислить бонус |
+| `unequip_item` | Снять оружие/броню |
+| `level_up` | Сжечь токены + XP для повышения уровня |
+| `request_airdrop` | Разовый кран 200 ROLAND |
+| `claim_daily_reward` | Ежедневные 50-120 ROLAND с серией |
+| `init_profile` | Создать пустой профиль PDA через CPI |
+| `recreate_profile` | Перезаписать профиль для существующего минта |
 
-## Tech Stack
+## Стек технологий
 
-- **Smart Contract:** Rust, Anchor Framework 0.30.1, Solana (devnet)
-- **Unity Client:** C#, Unity 2022.3 URP, TextMeshPro, UniTask
-- **Blockchain:** Solana Web3.js, Solana Unity SDK, spl-token
-- **NFT Metadata:** IPFS (Pinata pinning), on-chain URI references
-- **Audio:** Procedural synthesis (no external audio files)
+- **Смарт-контракт:** Rust, Anchor Framework 0.30.1, Solana (devnet)
+- **Unity-клиент:** C#, Unity 2022.3 URP, TextMeshPro, UniTask
+- **Блокчейн:** Solana Web3.js, Solana Unity SDK, spl-token
+- **Метаданные NFT:** IPFS (Pinata), on-chain URI-ссылки
+- **Аудио:** Процедурный синтез (без внешних аудиофайлов)
 
-## License
+## Лицензия
 
 MIT
